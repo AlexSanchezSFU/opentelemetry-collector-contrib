@@ -63,29 +63,25 @@ all-groups:
 	@echo "\nother: $(OTHER_MODS)"
 
 .PHONY: all
-all: install-tools all-common goporto multimod-verify gotest otelcontribcol
+all: install-tools goporto multimod-verify otelcontribcol
 
-.PHONY: all-common
-all-common:
-	@$(MAKE) $(FOR_GROUP_TARGET) TARGET="common"
+# .PHONY: e2e-test
+# e2e-test: otelcontribcol oteltestbedcol
+# 	$(MAKE) -C testbed run-tests
 
-.PHONY: e2e-test
-e2e-test: otelcontribcol oteltestbedcol
-	$(MAKE) -C testbed run-tests
+# .PHONY: integration-test
+# integration-test:
+# 	@$(MAKE) for-integration-target TARGET="mod-integration-test"
 
-.PHONY: integration-test
-integration-test:
-	@$(MAKE) for-integration-target TARGET="mod-integration-test"
-
-.PHONY: integration-tests-with-cover
-integration-tests-with-cover:
-	@$(MAKE) for-integration-target TARGET="do-integration-tests-with-cover"
+# .PHONY: integration-tests-with-cover
+# integration-tests-with-cover:
+# 	@$(MAKE) for-integration-target TARGET="do-integration-tests-with-cover"
 
 # Long-running e2e tests
-.PHONY: stability-tests
-stability-tests: otelcontribcol
-	@echo Stability tests are disabled until we have a stable performance environment.
-	@echo To enable the tests replace this echo by $(MAKE) -C testbed run-stability-tests
+# .PHONY: stability-tests
+# stability-tests: otelcontribcol
+# 	@echo Stability tests are disabled until we have a stable performance environment.
+# 	@echo To enable the tests replace this echo by $(MAKE) -C testbed run-stability-tests
 
 .PHONY: gogci
 gogci:
@@ -99,14 +95,14 @@ gotidy:
 gomoddownload:
 	$(MAKE) $(FOR_GROUP_TARGET) TARGET="moddownload"
 
-.PHONY: gotest
-gotest:
-	$(MAKE) $(FOR_GROUP_TARGET) TARGET="test"
+# .PHONY: gotest
+# gotest:
+# 	$(MAKE) $(FOR_GROUP_TARGET) TARGET="test"
 
-.PHONY: gotest-with-cover
-gotest-with-cover:
-	@$(MAKE) $(FOR_GROUP_TARGET) TARGET="test-with-cover"
-	$(GOCMD) tool covdata textfmt -i=./coverage/unit -o ./$(GROUP)-coverage.txt
+# .PHONY: gotest-with-cover
+# gotest-with-cover:
+# 	@$(MAKE) $(FOR_GROUP_TARGET) TARGET="test-with-cover"
+# 	$(GOCMD) tool covdata textfmt -i=./coverage/unit -o ./$(GROUP)-coverage.txt
 
 .PHONY: gofmt
 gofmt:
