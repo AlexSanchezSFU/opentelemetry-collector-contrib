@@ -201,8 +201,6 @@ github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.21.0
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.21.0/go.mod h1:BEOBnuYVyPt9wxVRQqqpKUK9FXVcL2+LOjZ8apLa9ao=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/collector v0.45.0 h1:jYuZ3VSmHtR/OE4ZNlhgaWefopMKh8kxHMITQ7hXB0s=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/collector v0.45.0/go.mod h1:b8EPYWl+yGWfPDP2P1slOiJkimNOQMD34szyZt1G0+s=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/collector/googlemanagedprometheus v0.45.0 h1:Kim3EFONcbm78LF3B/EPFegmsKtFYBNcoJ89ubBPblw=
-github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/collector/googlemanagedprometheus v0.45.0/go.mod h1:wyhLy43DJk49NlzxNhoqF0ueRjS3oBMJc1bjTmyYxiQ=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.21.0 h1:OEgjQy1rH4Fbn5IpuI9d0uhLl+j6DkDvh9Q2Ucd6GK8=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.21.0/go.mod h1:EUfJ8lb3pjD8VasPPwqIvG2XVCE6DOT8tY5tcwbWA+A=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/cloudmock v0.45.0 h1:/BF7rO6PYcmFoyJrq6HA3LqQpFSQei9aNuO1fvV3OqU=

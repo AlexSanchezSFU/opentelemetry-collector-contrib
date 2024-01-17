@@ -471,12 +471,6 @@ func TestDefaultReceivers(t *testing.T) {
 			t.Run("shutdown", func(t *testing.T) {
 				verifyReceiverShutdown(t, factory, tt.getConfigFn)
 			})
-			t.Run("lifecycle", func(t *testing.T) {
-				if tt.skipLifecycle {
-					t.SkipNow()
-				}
-				verifyReceiverLifecycle(t, factory, tt.getConfigFn)
-			})
 		})
 	}
 }

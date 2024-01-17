@@ -21,7 +21,6 @@ import (
 	"go.opentelemetry.io/collector/exporter/otlpexporter"
 	"go.opentelemetry.io/collector/exporter/otlphttpexporter"
 
-	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/alibabacloudlogserviceexporter"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awscloudwatchlogsexporter"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awsemfexporter"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/awskinesisexporter"
@@ -265,16 +264,6 @@ func TestDefaultExporters(t *testing.T) {
 			skipLifecycle: true,
 		},
 		{
-			exporter: "alibabacloud_logservice",
-			getConfigFn: func() component.Config {
-				cfg := expFactories["alibabacloud_logservice"].CreateDefaultConfig().(*alibabacloudlogserviceexporter.Config)
-				cfg.Endpoint = "http://" + endpoint
-				cfg.Project = "otel-testing"
-				cfg.Logstore = "otel-data"
-				return cfg
-			},
-		},
-		{
 			exporter: "awsemf",
 			getConfigFn: func() component.Config {
 				cfg := expFactories["awsemf"].CreateDefaultConfig().(*awsemfexporter.Config)
@@ -423,14 +412,6 @@ func TestDefaultExporters(t *testing.T) {
 		{
 			exporter:      "googlecloud",
 			skipLifecycle: true, // Requires credentials to be able to successfully load the exporter
-		},
-		{
-			exporter:      "googlemanagedprometheus",
-			skipLifecycle: true, // Requires credentials to be able to successfully load the exporter
-		},
-		{
-			exporter:      "googlecloudpubsub",
-			skipLifecycle: true,
 		},
 		{
 			exporter: "honeycombmarker",

@@ -54,8 +54,6 @@ body:
       - exporter/f5cloud
       - exporter/file
       - exporter/googlecloud
-      - exporter/googlecloudpubsub
-      - exporter/googlemanagedprometheus
       - exporter/honeycombmarker
       - exporter/influxdb
       - exporter/instana

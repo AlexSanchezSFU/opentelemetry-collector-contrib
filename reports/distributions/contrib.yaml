@@ -12,7 +12,6 @@ components:
         - spanmetrics
     exporter:
         - alertmanager
-        - alibabacloud_logservice
         - awscloudwatchlogs
         - awsemf
         - awskinesis
@@ -32,7 +31,6 @@ components:
         - file
         - googlecloud
         - googlecloudpubsub
-        - googlemanagedprometheus
         - honeycombmarker
         - influxdb
         - instana

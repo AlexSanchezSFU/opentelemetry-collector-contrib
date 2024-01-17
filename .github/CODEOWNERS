@@ -54,8 +54,6 @@ exporter/elasticsearchexporter/                          @open-telemetry/collect
 exporter/f5cloudexporter/                                @open-telemetry/collector-contrib-approvers @gramidt
 exporter/fileexporter/                                   @open-telemetry/collector-contrib-approvers @atingchen
 exporter/googlecloudexporter/                            @open-telemetry/collector-contrib-approvers @aabmass @dashpole @jsuereth @punya @damemi @psx95
-exporter/googlecloudpubsubexporter/                      @open-telemetry/collector-contrib-approvers @alexvanboxel
-exporter/googlemanagedprometheusexporter/                @open-telemetry/collector-contrib-approvers @aabmass @dashpole @jsuereth @punya @damemi @psx95
 exporter/honeycombmarkerexporter/                        @open-telemetry/collector-contrib-approvers @TylerHelmuth @fchikwekwe
 exporter/influxdbexporter/                               @open-telemetry/collector-contrib-approvers @jacobmarble
 exporter/instanaexporter/                                @open-telemetry/collector-contrib-approvers @jpkrohling @hickeyma
@@ -287,5 +285,3 @@ reports/distributions/liatrio.yaml  @open-telemetry/collector-contrib-approvers 
 
 
 ## UNMAINTAINED components
-
-exporter/alibabacloudlogserviceexporter/                 @open-telemetry/collector-contrib-approvers 

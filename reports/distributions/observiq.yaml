@@ -3,7 +3,6 @@ url: https://github.com/observIQ/observiq-otel-collector
 maintainers: []
 components:
     exporter:
-        - alibabacloud_logservice
         - awscloudwatchlogs
         - awsemf
         - awskinesis
@@ -19,7 +18,6 @@ components:
         - file
         - googlecloud
         - googlecloudpubsub
-        - googlemanagedprometheus
         - influxdb
         - kafka
         - loadbalancing

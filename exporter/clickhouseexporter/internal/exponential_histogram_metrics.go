@@ -29,6 +29,23 @@ CREATE TABLE IF NOT EXISTS %s_exponential_histogram (
     MetricDescription String CODEC(ZSTD(1)),
     MetricUnit String CODEC(ZSTD(1)),
     Attributes Map(LowCardinality(String), String) CODEC(ZSTD(1)),
+	session_id FixedString(36),
+    installation_id FixedString(36),
+    app_id LowCardinality(String),
+    app_environment LowCardinality(String),
+    app_version LowCardinality(String),
+    device_name LowCardinality(String),
+    device_platform LowCardinality(String),
+    device_os_version LowCardinality(String),
+    carrier LowCardinality(String),
+    network LowCardinality(String),
+    ip String CODEC(ZSTD(1)),
+    user_id FixedString(36),
+    operation LowCardinality(String),
+    bf LowCardinality(String),
+    type LowCardinality(String),
+	status LowCardinality(String),
+    reason LowCardinality(String),
 	StartTimeUnix DateTime64(9) CODEC(Delta, ZSTD(1)),
 	TimeUnix DateTime64(9) CODEC(Delta, ZSTD(1)),
     Count UInt64 CODEC(Delta, ZSTD(1)),
@@ -74,6 +91,23 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
     MetricDescription,
     MetricUnit,
     Attributes,
+	session_id,
+    installation_id,
+    app_id,
+    app_environment,
+    app_version,
+    device_name,
+    device_platform,
+    device_os_version,
+    carrier,
+    network,
+    ip,
+    user_id,
+    operation,
+    bf,
+    type,
+	status,
+    reason,
 	StartTimeUnix,
 	TimeUnix,
 	Count,
@@ -91,7 +125,7 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
     Exemplars.TraceId,
 	Flags,
 	Min,
-	Max) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+	Max) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
 )
 
 type expHistogramModel struct {
@@ -129,6 +163,59 @@ func (e *expHistogramMetrics) insert(ctx context.Context, db *sql.DB) error {
 				dp := model.expHistogram.DataPoints().At(i)
 
 				attrs, times, values, traceIDs, spanIDs := convertExemplars(dp.Exemplars())
+				mappedAttributes := attributesToMap(dp.Attributes())
+
+				sessionID := mappedAttributes["session_id"]
+				delete(mappedAttributes, "session_id")
+
+				installationID := mappedAttributes["installation_id"]
+				delete(mappedAttributes, "installation_id")
+
+				appID := mappedAttributes["app_id"]
+				delete(mappedAttributes, "app_id")
+
+				appEnvironment := mappedAttributes["app_environment"]
+				delete(mappedAttributes, "app_environment")
+
+				appVersion := mappedAttributes["app_version"]
+				delete(mappedAttributes, "app_version")
+
+				deviceName := mappedAttributes["device_name"]
+				delete(mappedAttributes, "device_name")
+
+				devicePlatform := mappedAttributes["device_platform"]
+				delete(mappedAttributes, "device_platform")
+
+				deviceOsVersion := mappedAttributes["device_os_version"]
+				delete(mappedAttributes, "device_os_version")
+
+				carrier := mappedAttributes["carrier"]
+				delete(mappedAttributes, "carrier")
+
+				network := mappedAttributes["network"]
+				delete(mappedAttributes, "network")
+
+				ip := mappedAttributes["ip"]
+				delete(mappedAttributes, "ip")
+
+				userID := mappedAttributes["user_id"]
+				delete(mappedAttributes, "user_id")
+
+				operation := mappedAttributes["operation"]
+				delete(mappedAttributes, "operation")
+
+				bf := mappedAttributes["bf"]
+				delete(mappedAttributes, "bf")
+
+				tipo := mappedAttributes["type"]
+				delete(mappedAttributes, "type")
+
+				status := mappedAttributes["status"]
+				delete(mappedAttributes, "status")
+
+				reason := mappedAttributes["reason"]
+				delete(mappedAttributes, "reason")
+
 				_, err = statement.ExecContext(ctx,
 					model.metadata.ResAttr,
 					model.metadata.ResURL,
@@ -140,7 +227,24 @@ func (e *expHistogramMetrics) insert(ctx context.Context, db *sql.DB) error {
 					model.metricName,
 					model.metricDescription,
 					model.metricUnit,
-					attributesToMap(dp.Attributes()),
+					mappedAttributes,
+					sessionID,
+					installationID,
+					appID,
+					appEnvironment,
+					appVersion,
+					deviceName,
+					devicePlatform,
+					deviceOsVersion,
+					carrier,
+					network,
+					ip,
+					userID,
+					operation,
+					bf,
+					tipo,
+					status,
+					reason,
 					dp.StartTimestamp().AsTime(),
 					dp.Timestamp().AsTime(),
 					dp.Count(),
