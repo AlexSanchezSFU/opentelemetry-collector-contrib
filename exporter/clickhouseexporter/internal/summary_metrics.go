@@ -105,8 +105,8 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
 	ValueAtQuantiles.Value,
     Flags) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
 
-	createSummaryTableClusterSQL = `CREATE TABLE %s_summary on cluster '{cluster}' AS %s_summary_local
-	ENGINE = Distributed('{cluster}', currentDatabase(), %s_summary_local, rand());`
+	createSummaryTableClusterSQL = `CREATE TABLE %[1]s_summary on cluster '{cluster}' AS %[1]s_summary_local
+	ENGINE = Distributed('{cluster}', currentDatabase(), %[1]s_summary_local, rand());`
 )
 
 type summaryModel struct {

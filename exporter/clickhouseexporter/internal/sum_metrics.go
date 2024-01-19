@@ -113,8 +113,8 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
 	AggTemp,
 	IsMonotonic) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
 
-	createSumTableClusterSQL = `CREATE TABLE %s_sum on cluster '{cluster}' AS %s_sum_local
-	ENGINE = Distributed('{cluster}', currentDatabase(), %s_sum_local, rand());`
+	createSumTableClusterSQL = `CREATE TABLE %[1]s_sum on cluster '{cluster}' AS %[1]s_sum_local
+	ENGINE = Distributed('{cluster}', currentDatabase(), %[1]s_sum_local, rand());`
 )
 
 type sumModel struct {

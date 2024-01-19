@@ -119,8 +119,8 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
 	Min,
 	Max) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
 
-	createHistogramTableClusterSQL = `CREATE TABLE %s_histogram on cluster '{cluster}' AS %s_histogram_local
-	ENGINE = Distributed('{cluster}', currentDatabase(), %s_histogram_local, rand());`
+	createHistogramTableClusterSQL = `CREATE TABLE %[1]s_histogram on cluster '{cluster}' AS %[1]s_histogram_local
+	ENGINE = Distributed('{cluster}', currentDatabase(), %[1]s_histogram_local, rand());`
 )
 
 type histogramModel struct {
