@@ -63,7 +63,7 @@ all-groups:
 	@echo "\nother: $(OTHER_MODS)"
 
 .PHONY: all
-all: install-tools goporto multimod-verify otelcontribcol
+all: install-tools otelcontribcol
 
 # .PHONY: e2e-test
 # e2e-test: otelcontribcol oteltestbedcol

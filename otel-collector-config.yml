@@ -1,0 +1,50 @@
+#Esto tiene que entrar por variables de entorno
+
+receivers:
+  otlp:
+    protocols:
+      http:
+        include_metadata: true
+        endpoint: 0.0.0.0:4318
+        cors:
+          allowed_origins:
+            - http://localhost:3000
+            - http://localhost:3001
+            - http://localhost:8013
+            - http://localhost:80
+            - http://localhost:*
+          max_age: 7200
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 1
+exporters:
+  debug:
+    verbosity: detailed
+  clickhouse:
+    endpoint: http://host.docker.internal:8123
+    database: otel
+    username: default
+    password: K4k6nxVw3P6y56n
+    metrics_table_name: otel_obsly_metrics
+    ttl: 72h
+    timeout: 5s
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [clickhouse]
+  telemetry:
+    logs:
+      level: DEBUG
+      initial_fields:
+        service: obsly-sdk-collector
+    metrics:
+      level: detailed
+      address: 0.0.0.0:8888
