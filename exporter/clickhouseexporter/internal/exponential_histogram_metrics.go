@@ -17,7 +17,7 @@ import (
 const (
 	// language=ClickHouse SQL
 	createExpHistogramTableSQL = `
-CREATE TABLE IF NOT EXISTS %s_exponential_histogram on cluster '{cluster}' (
+CREATE TABLE IF NOT EXISTS %s_exponential_histogram_local on cluster '{cluster}' (
     ResourceAttributes Map(LowCardinality(String), String) CODEC(ZSTD(1)),
     ResourceSchemaUrl String CODEC(ZSTD(1)),
     ScopeName String CODEC(ZSTD(1)),
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS %s_exponential_histogram on cluster '{cluster}' (
 	INDEX idx_scope_attr_value mapValues(ScopeAttributes) TYPE bloom_filter(0.01) GRANULARITY 1,
 	INDEX idx_attr_key mapKeys(Attributes) TYPE bloom_filter(0.01) GRANULARITY 1,
 	INDEX idx_attr_value mapValues(Attributes) TYPE bloom_filter(0.01) GRANULARITY 1
-) ENGINE MergeTree()
+) ENGINE ReplicatedMergeTree('/clickhouse/{installation}/{cluster}/tables/{shard}/{database}/{table}', '{replica}')
 %s
 PARTITION BY toDate(TimeUnix)
 ORDER BY (MetricName, Attributes, toUnixTimestamp64Nano(TimeUnix))
@@ -126,6 +126,9 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
 	Flags,
 	Min,
 	Max) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+
+	insertExpHistogramTableClusterSQL = `CREATE TABLE %s_exponential_histogram on cluster '{cluster}' AS %s_exponential_histogram_local
+	ENGINE = Distributed('{cluster}', currentDatabase(), %s_exponential_histogram_local, rand());`
 )
 
 type expHistogramModel struct {

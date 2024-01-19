@@ -19,11 +19,16 @@ import (
 )
 
 var supportedMetricTypes = map[string]struct{}{
-	createGaugeTableSQL:        {},
-	createSumTableSQL:          {},
-	createHistogramTableSQL:    {},
-	createExpHistogramTableSQL: {},
-	createSummaryTableSQL:      {},
+	createGaugeTableSQL:        			{},
+	createGaugeTableClusterSQL:				{},
+	createSumTableSQL:          			{},
+	createSumTableClusterSQL:				{},
+	createHistogramTableSQL:    			{},
+	createHistogramTableClusterSQL:			{},
+	createExpHistogramTableSQL: 			{},
+	insertExpHistogramTableClusterSQL: 		{},
+	createSummaryTableSQL:      			{},
+	createSummaryTableClusterSQL:			{},
 }
 
 var logger *zap.Logger
