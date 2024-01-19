@@ -218,7 +218,7 @@ func createDatabase(ctx context.Context, cfg *Config) error {
 	defer func() {
 		_ = db.Close()
 	}()
-	query := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", cfg.Database)
+	query := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s ON CLUSTER '{cluster}'", cfg.Database)
 	_, err = db.ExecContext(ctx, query)
 	if err != nil {
 		return fmt.Errorf("create database:%w", err)
