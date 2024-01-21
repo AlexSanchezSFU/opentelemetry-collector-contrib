@@ -109,7 +109,6 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
     Exemplars.SpanId,
     Exemplars.TraceId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
 
-
 	createGaugeTableClusterSQL = `CREATE TABLE %[1]s_gauge on cluster '{cluster}' AS %[1]s_gauge_local
 	ENGINE = Distributed('{cluster}', currentDatabase(), %[1]s_gauge_local, rand());`
 )

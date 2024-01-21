@@ -127,8 +127,8 @@ SETTINGS index_granularity=8192, ttl_only_drop_parts = 1;
 	Min,
 	Max) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
 
-	insertExpHistogramTableClusterSQL = `CREATE TABLE %s_exponential_histogram on cluster '{cluster}' AS %s_exponential_histogram_local
-	ENGINE = Distributed('{cluster}', currentDatabase(), %s_exponential_histogram_local, rand());`
+	insertExpHistogramTableClusterSQL = `CREATE TABLE %[1]s_exponential_histogram on cluster '{cluster}' AS %[1]s_exponential_histogram_local
+	ENGINE = Distributed('{cluster}', currentDatabase(), %[1]s_exponential_histogram_local, rand());`
 )
 
 type expHistogramModel struct {
